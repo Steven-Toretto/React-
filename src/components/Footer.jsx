@@ -37,7 +37,7 @@ function Footer() {
             <img src={logo} alt="Clozzet Logo" width={"200px"} />
             <p className=" py-4 " style={{ lineHeight: "1.8" }}>
               Offering a unique and stylish perspective on fashion is our number
-              one priority. Confuse your mirror with our trendy outfits
+              one priority. Confuse your mirror with our trendy outfits at clozzet.com.
             </p>
           </div>
 
