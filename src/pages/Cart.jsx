@@ -1,13 +1,20 @@
 import { useState } from "react";
-import { Trash2 } from "lucide-react"; // optional icon
+import { Trash2 } from "lucide-react";
 
+// IMPORT LOCAL IMAGES
+import sweater from "../assets/shop-images/knitted-sweater.png";
+import sneakers from "../assets/shop-images/unisex.png";
+import dress from "../assets/shop-images/slim-banquet-dress.png";
+import jeans from "../assets/shop-images/denim-jeans.png";
+
+// INITIAL CART DATA
 const initialCart = [
   {
     id: 1,
     name: "Strip Knitted Sweater",
     size: "XL",
     price: 2250,
-    image: "https://via.placeholder.com/80",
+    image: sweater,
     quantity: 1,
   },
   {
@@ -15,7 +22,7 @@ const initialCart = [
     name: "Unisex Airforce Sneakers",
     size: "40",
     price: 2000,
-    image: "https://via.placeholder.com/80",
+    image: sneakers,
     quantity: 1,
   },
   {
@@ -23,7 +30,7 @@ const initialCart = [
     name: "Slim Banquet Dress",
     size: "M",
     price: 10250,
-    image: "https://via.placeholder.com/80",
+    image: dress,
     quantity: 1,
   },
   {
@@ -31,44 +38,22 @@ const initialCart = [
     name: "Women Denim Jeans",
     size: "L",
     price: 10250,
-    image: "https://via.placeholder.com/80",
+    image: jeans,
     quantity: 1,
   },
 ];
 
-export default function Cart() {
+function Cart() {
   const [cart, setCart] = useState(initialCart);
-  const deliveryFee = 450;
 
-  const updateQty = (id, type) => {
-    setCart(cart.map(item =>
-      item.id === id
-        ? {
-            ...item,
-            quantity:
-              type === "inc"
-                ? item.quantity + 1
-                : Math.max(1, item.quantity - 1),
-          }
-        : item
-    ));
-  };
-
+  // REMOVE ITEM
   const removeItem = (id) => {
-    setCart(cart.filter(item => item.id !== id));
+    setCart(cart.filter((item) => item.id !== id));
   };
-
-  const subtotal = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
-
-  const total = subtotal + deliveryFee;
 
   return (
     <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
-      
-      {/* LEFT – CART ITEMS */}
+      {/* LEFT — CART ITEMS */}
       <div className="lg:col-span-2 border rounded-lg">
         <div className="grid grid-cols-3 p-4 border-b font-semibold">
           <p>Product</p>
@@ -76,89 +61,82 @@ export default function Cart() {
           <p className="text-right">Price</p>
         </div>
 
-        {cart.map(item => (
+        {cart.map((item) => (
           <div
             key={item.id}
             className="grid grid-cols-3 items-center p-4 border-b"
           >
             {/* PRODUCT */}
             <div className="flex gap-4 items-center">
-              <img src={item.image} alt={item.name} className="w-16 h-16" />
+              <img
+                src={item.image}
+                alt={item.name}
+                className="w-16 h-16 object-contain"
+              />
               <div>
                 <p className="font-medium">{item.name}</p>
                 <p className="text-sm text-gray-500">Size: {item.size}</p>
               </div>
             </div>
 
-            {/* QUANTITY */}
+            {/* QUANTITY (buttons visible but inactive) */}
             <div className="flex justify-center items-center gap-2">
-              <button
-                onClick={() => updateQty(item.id, "dec")}
-                className="border px-3"
-              >
-                −
-              </button>
+              <button className="border px-3 py-1">−</button>
               <span>{item.quantity}</span>
-              <button
-                onClick={() => updateQty(item.id, "inc")}
-                className="border px-3"
-              >
-                +
-              </button>
+              <button className="border px-3 py-1">+</button>
             </div>
 
-            {/* PRICE */}
+            {/* PRICE (constant display) */}
             <div className="flex justify-end items-center gap-4">
-              <p className="font-medium">
-                KSh {(item.price * item.quantity).toLocaleString()}
-              </p>
+              <p className="font-medium">KSh {item.price.toLocaleString()}</p>
               <button onClick={() => removeItem(item.id)}>
-                <Trash2 className="text-red-500 w-5" />
+                <Trash2 className="w-5 text-red-500" />
               </button>
             </div>
           </div>
         ))}
       </div>
 
-      {/* RIGHT – CART SUMMARY */}
+      {/* RIGHT — CART SUMMARY */}
       <div className="border rounded-lg p-6 bg-gray-50 h-fit">
         <h2 className="text-xl font-semibold mb-4">Cart Summary</h2>
 
         <p className="text-sm mb-2">Have a promo code? Apply here</p>
+
         <div className="flex gap-2 mb-4">
           <input
             type="text"
             placeholder="Promo Code (optional)"
             className="border p-2 flex-1 rounded"
           />
-          <button className="bg-emerald-400 text-white px-4 rounded">
-            Apply
-          </button>
+          <button className="bg-teal-400 text-white px-4 rounded">Apply</button>
         </div>
 
         <div className="space-y-2 text-sm">
           <div className="flex justify-between">
             <span>Subtotal</span>
-            <span>KSh {subtotal.toLocaleString()}</span>
+            <span>KSh 24,750</span> {/* constant value */}
           </div>
 
           <div className="flex justify-between">
             <span>Delivery Fee</span>
-            <span>KSh {deliveryFee.toLocaleString()}</span>
+            <span>KSh 450</span> {/* constant value */}
           </div>
 
           <hr />
 
           <div className="flex justify-between font-semibold text-lg">
             <span>Total</span>
-            <span>KSh {total.toLocaleString()}</span>
+            <span>KSh 25,200</span> {/* constant value */}
           </div>
         </div>
 
-        <button className="w-full mt-6 bg-emerald-400 text-white py-3 rounded font-medium">
+        <button className="w-full mt-6 bg-teal-400 text-white py-3 rounded font-medium">
           Checkout
         </button>
       </div>
     </div>
   );
 }
+
+export default Cart;
