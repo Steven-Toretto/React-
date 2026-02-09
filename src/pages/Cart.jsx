@@ -115,19 +115,19 @@ function Cart() {
         <div className="space-y-2 text-sm">
           <div className="flex justify-between">
             <span>Subtotal</span>
-            <span>KSh 24,750</span> {/* constant value */}
+            <span>KSh 24,750</span>
           </div>
 
           <div className="flex justify-between">
             <span>Delivery Fee</span>
-            <span>KSh 450</span> {/* constant value */}
+            <span>KSh 450</span>
           </div>
 
           <hr />
 
           <div className="flex justify-between font-semibold text-lg">
             <span>Total</span>
-            <span>KSh 25,200</span> {/* constant value */}
+            <span>KSh 25,200</span> 
           </div>
         </div>
 
