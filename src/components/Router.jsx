@@ -5,11 +5,6 @@ import Layout from "../pages/Layout";
 import Cart from "../pages/Cart";
 import { useState } from "react";
 
-function Cart(){
-    const [Cart, setState] = useState("")
-    
-}
-
 
 function Router() {
   return (
