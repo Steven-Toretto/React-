@@ -1,55 +1,10 @@
+import Collection from "../components/Collection";
 import { useState } from "react";
 import { Trash2 } from "lucide-react";
 
-// IMPORT LOCAL IMAGES
-import sweater from "../assets/shop-images/knitted-sweater.png";
-import sneakers from "../assets/shop-images/unisex.png";
-import dress from "../assets/shop-images/slim-banquet-dress.png";
-import jeans from "../assets/shop-images/denim-jeans.png";
 
-// INITIAL CART DATA
-const initialCart = [
-  {
-    id: 1,
-    name: "Strip Knitted Sweater",
-    size: "XL",
-    price: 2250,
-    image: sweater,
-    quantity: 1,
-  },
-  {
-    id: 2,
-    name: "Unisex Airforce Sneakers",
-    size: "40",
-    price: 2000,
-    image: sneakers,
-    quantity: 1,
-  },
-  {
-    id: 3,
-    name: "Slim Banquet Dress",
-    size: "M",
-    price: 10250,
-    image: dress,
-    quantity: 1,
-  },
-  {
-    id: 4,
-    name: "Women Denim Jeans",
-    size: "L",
-    price: 10250,
-    image: jeans,
-    quantity: 1,
-  },
-];
+function Cart({cart, setCart}) {
 
-function Cart() {
-  const [cart, setCart] = useState(initialCart);
-
-  // REMOVE ITEM
-  const removeItem = (id) => {
-    setCart(cart.filter((item) => item.id !== id));
-  };
 
   return (
     <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">

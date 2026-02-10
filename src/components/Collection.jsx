@@ -1,5 +1,5 @@
 import heart from "../assets/images/heart.png";
-function Collection({ img, title, price }) {
+function Collection({ img, title, price, cart, setCart }) {
 
   function handleAddToCart(e, product) {
           

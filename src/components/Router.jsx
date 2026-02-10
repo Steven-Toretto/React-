@@ -5,31 +5,31 @@ import Layout from "../pages/Layout";
 import Cart from "../pages/Cart";
 import { useState } from "react";
 
-// function Cart(){
-//     const [Cart, setState] = useState("")
     
-// }
+
 
 
 function Router() {
+      const [cart, setCart] = useState([])
+
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path="/"
           element={
-            <Layout>
+            <Layout cart={cart} setCart={setCart}>
               {" "}
-              <Home />{" "}
+              <Home cart={cart} setCart={setCart} />{" "}
             </Layout>
           }
         />
         <Route
           path="/cart"
           element={
-            <Layout>
+            <Layout cart={cart} setCart={setCart}>
               {" "}
-              <Cart />
+              <Cart cart={cart} setCart={setCart}/>
             </Layout>
           }
         />

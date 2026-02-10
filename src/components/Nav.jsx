@@ -2,7 +2,7 @@ import logo from "../assets/images/logo.svg";
 import { ShoppingCart } from "lucide-react";
 import {Menu} from "lucide-react";
 import { Link } from "react-router-dom";
-function Nav() {
+function Nav({cart, setCart}) {
   return (
     <nav>
       <div className="container mx-auto">
@@ -26,7 +26,7 @@ function Nav() {
           <div className="flex items-center gap-5 ">
             
             <ul className="lg:flex gap-5 hidden">
-                <li className=" cursor-pointer"> <Link to="/cart"> <ShoppingCart />{" "} </Link> </li>
+                <li className=" cursor-pointer"> <Link to="/cart"> <ShoppingCart/>{" "} </Link> </li>
               <li>
                 <Link to="">Sign up</Link>
               </li>
