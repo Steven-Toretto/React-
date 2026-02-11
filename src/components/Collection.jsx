@@ -4,7 +4,9 @@ function Collection({ img, title, price, cart, setCart }) {
   function handleAddToCart(e, product) {
           
           if(e.target.textContent.toLowerCase() === "add to cart"){
-            console.log("hello")
+            setCart(prev=>[...prev, product])
+            e.target.textContent = "Added to Cart"
+            e.target.style.background = "gray"
           }
         }
 

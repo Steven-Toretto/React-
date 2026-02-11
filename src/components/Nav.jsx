@@ -3,6 +3,7 @@ import { ShoppingCart } from "lucide-react";
 import {Menu} from "lucide-react";
 import { Link } from "react-router-dom";
 function Nav({cart, setCart}) {
+  
   return (
     <nav>
       <div className="container mx-auto">
@@ -26,7 +27,11 @@ function Nav({cart, setCart}) {
           <div className="flex items-center gap-5 ">
             
             <ul className="lg:flex gap-5 hidden">
-                <li className=" cursor-pointer"> <Link to="/cart"> <ShoppingCart/>{" "} </Link> </li>
+                <li className=" relative "> <Link to="/cart"> <ShoppingCart/>{" "} 
+                {cart.length > 0 && (
+                <span className=" flex items-center justify-center absolute -top-2 -right-3 bg-teal-500 text-white text-xs font-bold rounded-full h-5 w-5">{cart.length}</span>)}
+                </Link>
+                 </li>
               <li>
                 <Link to="">Sign up</Link>
               </li>
@@ -40,5 +45,6 @@ function Nav({cart, setCart}) {
       </div>
     </nav>
   );
+  
 }
 export default Nav;

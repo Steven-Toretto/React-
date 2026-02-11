@@ -1,9 +1,29 @@
 import Collection from "../components/Collection";
-import { useState } from "react";
-import { Trash2 } from "lucide-react";
+import { useEffect, useState } from "react";
+
+import CartProduct from "../components/CartProduct";
+
+function Cart({ cart, setCart }) {
+  const [cartCopy, setCartCopy] = useState([]);
+
+  useEffect(()=>{
+    setCartCopy([...cart])
+
+      const cartCopyData = JSON.parse(localStorage.getItem('cartCopy'))
+  if(cartCopyData){
+    setCartCopy(cartCopyData)
+  }else{
+    setCartCopy(cart)
+  }
+  },[])
+////
+
+  useEffect(()=>{
+  if(cartCopy.length !== 0)
+    localStorage.setItem("cartCopy", JSON.stringify(cartCopy))
+  },[cartCopy]);
 
 
-function Cart({cart, setCart}) {
 
 
   return (
@@ -16,40 +36,9 @@ function Cart({cart, setCart}) {
           <p className="text-right">Price</p>
         </div>
 
-        {cart.map((item) => (
-          <div
-            key={item.id}
-            className="grid grid-cols-3 items-center p-4 border-b"
-          >
-            {/* PRODUCT */}
-            <div className="flex gap-4 items-center">
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-16 h-16 object-contain"
-              />
-              <div>
-                <p className="font-medium">{item.name}</p>
-                <p className="text-sm text-gray-500">Size: {item.size}</p>
-              </div>
-            </div>
-
-            {/* QUANTITY (buttons visible but inactive) */}
-            <div className="flex justify-center items-center gap-2">
-              <button className="border px-3 py-1">−</button>
-              <span>{item.quantity}</span>
-              <button className="border px-3 py-1">+</button>
-            </div>
-
-            {/* PRICE (constant display) */}
-            <div className="flex justify-end items-center gap-4">
-              <p className="font-medium">KSh {item.price.toLocaleString()}</p>
-              <button onClick={() => removeItem(item.id)}>
-                <Trash2 className="w-5 text-red-500" />
-              </button>
-            </div>
-          </div>
-        ))}
+        {cart && cart.map((item) => {
+         return <CartProduct cart={cart} setCart={setCart} item={item} cartCopy={cartCopy} setCartCopy={setCartCopy} key={item.title}/>
+})}
       </div>
 
       {/* RIGHT — CART SUMMARY */}
@@ -82,7 +71,7 @@ function Cart({cart, setCart}) {
 
           <div className="flex justify-between font-semibold text-lg">
             <span>Total</span>
-            <span>KSh 25,200</span> 
+            <span>KSh 25,200</span>
           </div>
         </div>
 
