@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import CartProduct from "../components/CartProduct";
 
-function Cart({ cart, setCart }) {
+function Cart({ cart, setCart, item, title }) {
   const [cartCopy, setCartCopy] = useState([]);
 
   useEffect(()=>{
@@ -22,7 +22,6 @@ function Cart({ cart, setCart }) {
   if(cartCopy.length !== 0)
     localStorage.setItem("cartCopy", JSON.stringify(cartCopy))
   },[cartCopy]);
-
 
 
 
@@ -59,7 +58,7 @@ function Cart({ cart, setCart }) {
         <div className="space-y-2 text-sm">
           <div className="flex justify-between">
             <span>Subtotal</span>
-            <span>KSh 24,750</span>
+            <span>KSh {cartCopy.reduce((acc,curr)=>acc+ curr.price,0)}</span>
           </div>
 
           <div className="flex justify-between">
@@ -71,7 +70,7 @@ function Cart({ cart, setCart }) {
 
           <div className="flex justify-between font-semibold text-lg">
             <span>Total</span>
-            <span>KSh 25,200</span>
+            <span>KSh {cartCopy.reduce((acc,curr)=>acc+ curr.price,450)}</span>
           </div>
         </div>
 

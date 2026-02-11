@@ -26,6 +26,10 @@ function CartProduct({ item, setCart, cart, cartCopy, setCartCopy }) {
           <p className="text-sm text-gray-500">Size: {item.size}</p>
         </div>
       </div>
+      {/* ---------- */}
+      {console.log(
+        cartCopy.filter((cartItem) => cartItem.title === item.title),
+      )}
 
       {/* QUANTITY*/}
       <div className="flex justify-center items-center gap-2">
@@ -53,9 +57,10 @@ function CartProduct({ item, setCart, cart, cartCopy, setCartCopy }) {
 
       {/* PRICE */}
       <div className="flex justify-end items-center gap-4">
-        <p className="font-medium">KSh {item.price.toLocaleString()}</p>
+        
+        <p className="font-medium">KSh {cartCopy.filter((cartItem) => cartItem.title === item.title).reduce((acc,curr)=>acc+ curr.price,0)}</p>
         <button onClick={() => removeItem(item.id)}>
-          <Trash2 className="w-5 text-red-500" />
+          <Trash2 className="w-5 text-red-500 cursor-pointer" />
         </button>
       </div>
     </div>
