@@ -13,7 +13,17 @@ function CartProduct({ item, setCart, cart, cartCopy, setCartCopy }) {
   }
 
   const removeItem = (title)=>{
-    setCart(cart.filter((item)=>item.title !== title))
+const removeItem = cart.filter((item)=>item.title !== title)
+const removeCartCopy = cart.filter((item)=>item.title !== title)
+
+setCart (removeItem)
+setCartCopy(removeCartCopy)
+
+if(removeItem.length === 0){
+  localStorage.removeItem('cart')
+  localStorage.removeItem('cartCopy')
+}
+    
   }
 
 
@@ -32,10 +42,10 @@ function CartProduct({ item, setCart, cart, cartCopy, setCartCopy }) {
           <p className="text-sm text-gray-500">Size: {item.size}</p>
         </div>
       </div>
-      {/* ---------- */}
+      {/* ----------
       {console.log(
         cartCopy.filter((cartItem) => cartItem.title === item.title),
-      )}
+      )}                                      */}
 
       {/* QUANTITY*/}
       <div className="flex justify-center items-center gap-2">
@@ -67,7 +77,7 @@ function CartProduct({ item, setCart, cart, cartCopy, setCartCopy }) {
         <p className="font-medium">KSh {cartCopy.filter((cartItem) => cartItem.title === item.title).reduce((acc,curr)=>acc+ curr.price,0)}</p>
         
         <button onClick={() => removeItem(item.title)}>
-  <Trash2 className="w-5 text-red-500 cursor-pointer" />
+  <Trash2 className="w-5 text-red-500 cursor-pointer"/>
 </button>
 
       </div>
